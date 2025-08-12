@@ -328,18 +328,18 @@ export default function ProductsPage() {
             {/* Advanced Search Bar (md+ only) */}
             <div className="hidden md:block mb-5 rounded-xl border bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/40 shadow-sm">
               <div className="grid gap-4 p-4 md:grid-cols-12 md:items-end">
-                <div className="md:col-span-3"><Combobox label="use" value={draftUse} onChange={(v) => setDraftUse(v as UseCase)} options={useCases} /></div>
+                <div className="md:col-span-3"><Combobox label="Use" value={draftUse} onChange={(v) => setDraftUse(v as UseCase)} options={useCases} /></div>
                 <div className="md:col-span-3"><Combobox label="Who to give it to" value={draftRecipient} onChange={(v) => setDraftRecipient(v as Recipient)} options={recipients} /></div>
-                <div className="md:col-span-3"><Combobox label="theme" value={draftTheme} onChange={(v) => setDraftTheme(v as Theme)} options={themes} /></div>
-                <div className="md:col-span-3"><Combobox label="price" value={draftPricePreset} onChange={setDraftPricePreset} options={["0-500", "500-1000", "1000-2000", "2000+"]} /></div>
-                <div className="md:col-span-3"><Combobox label="area" value={draftArea} onChange={(v) => setDraftArea(v as Area)} options={areas} /></div>
+                <div className="md:col-span-3"><Combobox label="Theme" value={draftTheme} onChange={(v) => setDraftTheme(v as Theme)} options={themes} /></div>
+                <div className="md:col-span-3"><Combobox label="Price" value={draftPricePreset} onChange={setDraftPricePreset} options={["0-500", "500-1000", "1000-2000", "2000+"]} /></div>
+                <div className="md:col-span-3"><Combobox label="Area" value={draftArea} onChange={(v) => setDraftArea(v as Area)} options={areas} /></div>
                 <div className="md:col-span-6">
-                  <Label className="mb-1 block text-xs text-muted-foreground">keywords</Label>
+                  <Label className="mb-1 block text-xs text-muted-foreground">Keywords</Label>
                   <Input className="h-10" placeholder="Search gift cards…" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 </div>
                 <div className="md:col-span-3 flex gap-2 md:justify-end">
-                  <Button variant="outline" className="h-10 px-4" onClick={resetAdvanced}>reset</Button>
-                  <Button className="h-10 px-4" onClick={applyAdvanced}>search</Button>
+                  <Button variant="outline" className="h-10 px-4" onClick={resetAdvanced}>Reset</Button>
+                  <Button className="h-10 px-4" onClick={applyAdvanced}>Search</Button>
                 </div>
               </div>
             </div>
@@ -411,7 +411,7 @@ export default function ProductsPage() {
             />
           </div>
           <SheetFooter className="sticky bottom-0 left-0 right-0 bg-background/95 backdrop-blur px-4 py-3 border-t shadow-[0_-8px_24px_rgba(0,0,0,0.06)]">
-            <Button className="w-full h-10" onClick={() => setOpenFilters(false)}>Apply & close</Button>
+            <Button className="w-full h-10" onClick={() => setOpenFilters(false)}>Apply & Close</Button>
           </SheetFooter>
         </SheetContent>
       </Sheet>
@@ -423,18 +423,18 @@ export default function ProductsPage() {
           <SheetHeader className="px-4 pt-4"><SheetTitle>Search</SheetTitle></SheetHeader>
           <div className="px-4 pt-4">
             <div className="rounded-xl border p-4 space-y-4">
-              <Combobox label="use" value={draftUse} onChange={(v) => setDraftUse(v as UseCase)} options={useCases} />
+              <Combobox label="Use" value={draftUse} onChange={(v) => setDraftUse(v as UseCase)} options={useCases} />
               <Combobox label="Who to give it to" value={draftRecipient} onChange={(v) => setDraftRecipient(v as Recipient)} options={recipients} />
-              <Combobox label="theme" value={draftTheme} onChange={(v) => setDraftTheme(v as Theme)} options={themes} />
-              <Combobox label="price" value={draftPricePreset} onChange={setDraftPricePreset} options={["0-500", "500-1000", "1000-2000", "2000+"]} />
-              <Combobox label="area" value={draftArea} onChange={(v) => setDraftArea(v as Area)} options={areas} />
+              <Combobox label="Theme" value={draftTheme} onChange={(v) => setDraftTheme(v as Theme)} options={themes} />
+              <Combobox label="Price" value={draftPricePreset} onChange={setDraftPricePreset} options={["0-500", "500-1000", "1000-2000", "2000+"]} />
+              <Combobox label="Area" value={draftArea} onChange={(v) => setDraftArea(v as Area)} options={areas} />
               <div>
-                <Label className="mb-1 block text-xs text-muted-foreground">keywords</Label>
+                <Label className="mb-1 block text-xs text-muted-foreground">Keywords</Label>
                 <Input className="h-10" placeholder="Search gift cards…" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" className="h-10" onClick={resetAdvanced}>reset</Button>
-                <Button className="h-10" onClick={() => { applyAdvanced(); setOpenSearch(false); }}>search</Button>
+                <Button variant="outline" className="h-10" onClick={resetAdvanced}>Reset</Button>
+                <Button className="h-10" onClick={() => { applyAdvanced(); setOpenSearch(false); }}>Search</Button>
               </div>
             </div>
           </div>
