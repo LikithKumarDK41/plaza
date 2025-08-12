@@ -17,22 +17,20 @@ interface CartProps {
 
 const mockCart: CartItem[] = [
   {
-    category: "Audio",
+    category: "Birthday",
     id: "1",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    name: "Premium Wireless Headphones",
-    price: 199.99,
+    image: "/plaza/home/giftcards/gift-card1.png",
+    name: "Digital Gift Card - ₹500",
+    price: 500,
     quantity: 1,
   },
   {
-    category: "Wearables",
+    category: "Anniversary",
     id: "2",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    name: "Smart Watch Series 5",
-    price: 299.99,
-    quantity: 2,
+    image: "/plaza/home/giftcards/gift-card2.png",
+    name: "Anniversary Gift Card - ₹1000",
+    price: 1000,
+    quantity: 1,
   },
 ];
 
