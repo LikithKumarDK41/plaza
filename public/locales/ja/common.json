@@ -29,7 +29,7 @@
         "logout": "ログアウト"
     },
     "footer": {
-        "tagline": "どんなシーンにもぴったりの贈り物を。Gift Plaza のデジタルギフトカードで喜びを届けましょう。",
+        "tagline": "どんなシーンにもぴったりの贈り物をGift Plaza のデジタルギフトカードで喜びを届けましょう。",
         "social": {
             "facebook": "フェイスブック",
             "twitter": "ツイッター",
@@ -65,13 +65,13 @@
             "cookies": "クッキー",
             "sitemap": "サイトマップ"
         },
-        "copyright": "© {{year}} {{name}}. 無断転載を禁じます。"
+        "copyright": "© {{year}} {{name}}. "
     },
     "home": {
         "hero": {
-            "titleLead": "特別な瞬間を祝う",
-            "titleEmphasis": "デジタルギフトカード",
-            "subtitle": "誕生日・記念日・季節のイベントに。パーソナライズしたギフトカードをその場でお届け。",
+            "titleLead": "デジタルギフトカードで",
+            "titleEmphasis": "特別な瞬間をお祝いしましょう！",
+            "subtitle": "誕生日も記念日もお祝いも、Gift Plazaでパーソナライズしたギフトカードをすぐに！",
             "ctaBrowse": "ギフトカードを見る",
             "ctaHow": "ご利用方法",
             "badgeInstant": "即時デジタル配信",
@@ -88,6 +88,55 @@
             "title": "おすすめギフトカード",
             "subtitle": "人気＆注目のギフトカードをチェック",
             "viewAll": "すべてのギフトカードを見る"
+        }
+    },
+    "products": {
+        "mobile": {
+            "filters": "絞り込み",
+            "search": "検索",
+            "applyClose": "適用して閉じる"
+        },
+        "results": "{{count}} 件",
+        "empty": "ギフトカードが見つかりませんでした。",
+        "filters": {
+            "title": "絞り込み",
+            "clear": "すべてクリア",
+            "categories": "カテゴリー",
+            "series": "シリーズ",
+            "use": "用途",
+            "price": "価格（{{currency}}）",
+            "rating": "評価",
+            "any": "指定なし",
+            "inStockOnly": "在庫ありのみ",
+            "sortBy": "並び替え"
+        },
+        "sort": {
+            "relevance": "関連度",
+            "priceAsc": "価格：安い順",
+            "priceDesc": "価格：高い順",
+            "ratingDesc": "評価：高い順"
+        },
+        "advanced": {
+            "use": "用途",
+            "recipient": "贈る相手",
+            "theme": "テーマ",
+            "price": "価格",
+            "area": "地域",
+            "keywordsLabel": "キーワード",
+            "keywordsPlaceholder": "ギフトカードを検索…"
+        },
+        "actions": {
+            "reset": "リセット",
+            "search": "検索"
+        },
+        "combobox": {
+            "notSpecified": "未指定",
+            "search": "{{label}}を検索…",
+            "noResults": "該当する結果がありません。"
+        },
+        "pagination": {
+            "prev": "前へ",
+            "next": "次へ"
         }
     }
 }

@@ -65,11 +65,11 @@
             "cookies": "Cookies",
             "sitemap": "Sitemap"
         },
-        "copyright": "© {{year}} {{name}}. All rights reserved."
+        "copyright": "© {{year}} {{name}}."
     },
     "home": {
         "hero": {
-            "titleLead": "Celebrate Moments with",
+            "titleLead": "Celebrate Moments with ",
             "titleEmphasis": "Digital Gift Cards",
             "subtitle": "Send instant joy with personalized gift cards for birthdays, anniversaries, festivals, and more – all in one place at GiftPlaza.",
             "ctaBrowse": "Browse Gift Cards",
@@ -88,6 +88,55 @@
             "title": "Featured Gift Cards",
             "subtitle": "Discover our top-rated and trending gift cards",
             "viewAll": "View All Gift Cards"
+        }
+    },
+    "products": {
+        "mobile": {
+            "filters": "Filters",
+            "search": "Search",
+            "applyClose": "Apply & Close"
+        },
+        "results": "{{count}} results",
+        "empty": "No gift cards found.",
+        "filters": {
+            "title": "Filters",
+            "clear": "Clear all",
+            "categories": "Categories",
+            "series": "Series",
+            "use": "Use",
+            "price": "Price ({{currency}})",
+            "rating": "Rating",
+            "any": "Any",
+            "inStockOnly": "In stock only",
+            "sortBy": "Sort by"
+        },
+        "sort": {
+            "relevance": "Relevance",
+            "priceAsc": "Price: Low to High",
+            "priceDesc": "Price: High to Low",
+            "ratingDesc": "Rating: High to Low"
+        },
+        "advanced": {
+            "use": "Use",
+            "recipient": "Who to give it to",
+            "theme": "Theme",
+            "price": "Price",
+            "area": "Area",
+            "keywordsLabel": "Keywords",
+            "keywordsPlaceholder": "Search gift cards…"
+        },
+        "actions": {
+            "reset": "Reset",
+            "search": "Search"
+        },
+        "combobox": {
+            "notSpecified": "Not specified",
+            "search": "Search {{label}}…",
+            "noResults": "No results."
+        },
+        "pagination": {
+            "prev": "Previous",
+            "next": "Next"
         }
     }
 }

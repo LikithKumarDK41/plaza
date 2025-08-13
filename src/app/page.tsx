@@ -140,12 +140,12 @@ export default function HomePage() {
                 <div className="space-y-4">
                   <h1
                     className="
-                      font-display text-4xl leading-tight font-bold
-                      tracking-tight text-foreground sm:text-5xl md:text-6xl
+                      font-display text-3xl leading-tight font-bold
+                      tracking-tight text-foreground sm:text-5xl md:text-5xl
                       lg:leading-[1.1]
                     "
                   >
-                    {t('home.hero.titleLead')}{' '}
+                    {t('home.hero.titleLead')}
                     <span
                       className="
                         bg-gradient-to-r from-primary to-primary/70 bg-clip-text
@@ -283,7 +283,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      </main>
+      </main >
     </>
   );
 }

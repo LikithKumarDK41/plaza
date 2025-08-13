@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { useTranslation } from "react-i18next";
+
 import { useCart } from "~/lib/hooks/use-cart";
 import { ProductCard } from "~/ui/components/product-card";
 
@@ -44,35 +46,66 @@ const slugify = (s: string) =>
   s.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, "");
 
 /* -------------------------------------------------------------------------- */
-/* Combobox helper                                                             */
+/* Combobox helper (i18n-aware)                                               */
 /* -------------------------------------------------------------------------- */
 function Combobox({
-  label, placeholder = "Not specified", value, onChange, options,
-}: { label: string; placeholder?: string; value: string; onChange: (v: string) => void; options: string[]; }) {
+  label,
+  placeholder,
+  value,
+  onChange,
+  options,
+  renderOption,
+}: {
+  label: string;
+  placeholder: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+  renderOption?: (opt: string) => string;
+}) {
   const [open, setOpen] = React.useState(false);
   const selected = value || "";
+  const { t } = useTranslation("common");
+
+  const searchPlaceholder = t("products.combobox.search", { label });
+
   return (
     <div className="w-full">
       <Label className="mb-1 block text-xs text-muted-foreground">{label}</Label>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" className="w-full justify-between h-10 px-3 rounded-lg">
-            <span className="truncate">{selected || placeholder}</span>
+            <span className="truncate">{selected ? (renderOption ? renderOption(selected) : selected) : placeholder}</span>
             <span aria-hidden>▾</span>
           </Button>
         </PopoverTrigger>
         <PopoverContent align="start" className="p-0 w-[--radix-popover-trigger-width]">
           <Command className="w-full">
-            <CommandInput placeholder={`Search ${label.toLowerCase()}…`} className="h-9" />
+            <CommandInput placeholder={searchPlaceholder} className="h-9" />
             <CommandList>
-              <CommandEmpty>No results.</CommandEmpty>
+              <CommandEmpty>{t("products.combobox.noResults")}</CommandEmpty>
               <CommandGroup>
-                <CommandItem value="" className="h-9" onSelect={() => { onChange(""); setOpen(false); }}>
+                <CommandItem
+                  value=""
+                  className="h-9"
+                  onSelect={() => {
+                    onChange("");
+                    setOpen(false);
+                  }}
+                >
                   {placeholder}
                 </CommandItem>
                 {options.map((opt) => (
-                  <CommandItem key={opt} value={opt} className="h-9" onSelect={() => { onChange(opt); setOpen(false); }}>
-                    {opt}
+                  <CommandItem
+                    key={opt}
+                    value={opt}
+                    className="h-9"
+                    onSelect={() => {
+                      onChange(opt);
+                      setOpen(false);
+                    }}
+                  >
+                    {renderOption ? renderOption(opt) : opt}
                   </CommandItem>
                 ))}
               </CommandGroup>
@@ -85,7 +118,7 @@ function Combobox({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Filters panel                                                               */
+/* Filters panel (i18n-aware)                                                  */
 /* -------------------------------------------------------------------------- */
 function FiltersPanel({
   categories, seriesList, useCases, range, setRange, minPrice, maxPrice,
@@ -104,15 +137,28 @@ function FiltersPanel({
   quickPreset: (v: string) => void; onClearAll: () => void;
 }) {
   const [priceMin, priceMax] = range;
+  const { t } = useTranslation("common");
+
+  // map sort keys to localized labels (keeps values stable for logic)
+  const sortLabel = (key: "relevance" | "price-asc" | "price-desc" | "rating-desc") =>
+  ({
+    "relevance": t("products.sort.relevance"),
+    "price-asc": t("products.sort.priceAsc"),
+    "price-desc": t("products.sort.priceDesc"),
+    "rating-desc": t("products.sort.ratingDesc"),
+  }[key]);
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Filters</h2>
-        <Button variant="ghost" size="sm" onClick={onClearAll} className="h-8">Clear all</Button>
+        <h2 className="text-xl font-semibold">{t("products.filters.title")}</h2>
+        <Button variant="ghost" size="sm" onClick={onClearAll} className="h-8">
+          {t("products.filters.clear")}
+        </Button>
       </div>
 
       <section>
-        <Label className="mb-2 block text-sm">Categories</Label>
+        <Label className="mb-2 block text-sm">{t("products.filters.categories")}</Label>
         <div className="space-y-2">
           {categories.map((c) => (
             <label key={slugify(c)} className="flex items-center gap-2 text-sm">
@@ -124,7 +170,7 @@ function FiltersPanel({
       </section>
 
       <section>
-        <Label className="mb-2 block text-sm">Series</Label>
+        <Label className="mb-2 block text-sm">{t("products.filters.series")}</Label>
         <div className="space-y-2">
           {seriesList.map((s) => (
             <label key={slugify(s)} className="flex items-center gap-2 text-sm">
@@ -136,7 +182,7 @@ function FiltersPanel({
       </section>
 
       <section>
-        <Label className="mb-2 block text-sm">Use</Label>
+        <Label className="mb-2 block text-sm">{t("products.filters.use")}</Label>
         <div className="space-y-2">
           {useCases.map((u) => (
             <label key={slugify(u)} className="flex items-center gap-2 text-sm">
@@ -148,7 +194,7 @@ function FiltersPanel({
       </section>
 
       <section>
-        <Label className="mb-2 block text-sm">Price (¥)</Label>
+        <Label className="mb-2 block text-sm">{t("products.filters.price", { currency: "¥" })}</Label>
         <div className="px-2">
           <Slider value={range} min={minPrice} max={maxPrice} step={50} onValueChange={(v) => setRange(v as number[])} />
         </div>
@@ -163,11 +209,17 @@ function FiltersPanel({
       </section>
 
       <section>
-        <Label className="mb-2 block text-sm">Rating</Label>
+        <Label className="mb-2 block text-sm">{t("products.filters.rating")}</Label>
         <div className="flex flex-wrap gap-2">
           {[0, 4.0, 4.5].map((r) => (
-            <Button key={r} size="sm" className="h-9 px-3" variant={ratingAtLeast === r ? "default" : "outline"} onClick={() => setRatingAtLeast(r)}>
-              {r === 0 ? "Any" : `${r}+`}
+            <Button
+              key={r}
+              size="sm"
+              className="h-9 px-3"
+              variant={ratingAtLeast === r ? "default" : "outline"}
+              onClick={() => setRatingAtLeast(r)}
+            >
+              {r === 0 ? t("products.filters.any") : `${r}+`}
             </Button>
           ))}
         </div>
@@ -175,14 +227,21 @@ function FiltersPanel({
 
       <section>
         <div className="flex items-center justify-between">
-          <Label className="text-sm">In stock only</Label>
+          <Label className="text-sm">{t("products.filters.inStockOnly")}</Label>
           <Switch checked={inStockOnly} onCheckedChange={setInStockOnly} />
         </div>
       </section>
 
       <section>
-        <Label className="mb-2 block text-sm">Sort by</Label>
-        <Combobox label="" placeholder="Relevance" value={sortBy} onChange={(v) => setSortBy((v as any) || "relevance")} options={["relevance", "price-asc", "price-desc", "rating-desc"]} />
+        <Label className="mb-2 block text-sm">{t("products.filters.sortBy")}</Label>
+        <Combobox
+          label=""
+          placeholder={sortLabel("relevance")}
+          value={sortBy}
+          onChange={(v) => setSortBy((v as any) || "relevance")}
+          options={["relevance", "price-asc", "price-desc", "rating-desc"]}
+          renderOption={(opt) => sortLabel(opt as any)}
+        />
       </section>
     </div>
   );
@@ -192,6 +251,7 @@ function FiltersPanel({
 
 export default function ProductsPage() {
   const cart = useCart();
+  const { t } = useTranslation("common");
 
   /* derived lists */
   const categories = React.useMemo<Category[]>(() => Array.from(new Set(featuredGiftCardsHomepage.map((p) => p.category))).sort(), []);
@@ -302,10 +362,16 @@ export default function ProductsPage() {
           {/* Mobile top bar: TWO buttons */}
           <div className="md:hidden flex items-center justify-between px-1">
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="h-9" onClick={() => setOpenFilters(true)}>Filters</Button>
-              <Button variant="default" size="sm" className="h-9" onClick={() => setOpenSearch(true)}>Search</Button>
+              <Button variant="outline" size="sm" className="h-9" onClick={() => setOpenFilters(true)}>
+                {t("products.mobile.filters")}
+              </Button>
+              <Button variant="default" size="sm" className="h-9" onClick={() => setOpenSearch(true)}>
+                {t("products.mobile.search")}
+              </Button>
             </div>
-            <span className="text-sm text-muted-foreground">{filteredProducts.length} results</span>
+            <span className="text-sm text-muted-foreground">
+              {t("products.results", { count: filteredProducts.length })}
+            </span>
           </div>
 
           {/* LEFT sidebar (md+): Filters */}
@@ -328,42 +394,82 @@ export default function ProductsPage() {
             {/* Advanced Search Bar (md+ only) */}
             <div className="hidden md:block mb-5 rounded-xl border bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/40 shadow-sm">
               <div className="grid gap-4 p-4 md:grid-cols-12 md:items-end">
-                <div className="md:col-span-3"><Combobox label="Use" value={draftUse} onChange={(v) => setDraftUse(v as UseCase)} options={useCases} /></div>
-                <div className="md:col-span-3"><Combobox label="Who to give it to" value={draftRecipient} onChange={(v) => setDraftRecipient(v as Recipient)} options={recipients} /></div>
-                <div className="md:col-span-3"><Combobox label="Theme" value={draftTheme} onChange={(v) => setDraftTheme(v as Theme)} options={themes} /></div>
-                <div className="md:col-span-3"><Combobox label="Price" value={draftPricePreset} onChange={setDraftPricePreset} options={["0-500", "500-1000", "1000-2000", "2000+"]} /></div>
-                <div className="md:col-span-3"><Combobox label="Area" value={draftArea} onChange={(v) => setDraftArea(v as Area)} options={areas} /></div>
+                <div className="md:col-span-3">
+                  <Combobox
+                    label={t("products.advanced.use")}
+                    placeholder={t("products.combobox.notSpecified")}
+                    value={draftUse}
+                    onChange={(v) => setDraftUse(v as UseCase)}
+                    options={useCases}
+                  />
+                </div>
+                <div className="md:col-span-3">
+                  <Combobox
+                    label={t("products.advanced.recipient")}
+                    placeholder={t("products.combobox.notSpecified")}
+                    value={draftRecipient}
+                    onChange={(v) => setDraftRecipient(v as Recipient)}
+                    options={recipients}
+                  />
+                </div>
+                <div className="md:col-span-3">
+                  <Combobox
+                    label={t("products.advanced.theme")}
+                    placeholder={t("products.combobox.notSpecified")}
+                    value={draftTheme}
+                    onChange={(v) => setDraftTheme(v as Theme)}
+                    options={themes}
+                  />
+                </div>
+                <div className="md:col-span-3">
+                  <Combobox
+                    label={t("products.advanced.price")}
+                    placeholder={t("products.combobox.notSpecified")}
+                    value={draftPricePreset}
+                    onChange={setDraftPricePreset}
+                    options={["0-500", "500-1000", "1000-2000", "2000+"]}
+                  />
+                </div>
+                <div className="md:col-span-3">
+                  <Combobox
+                    label={t("products.advanced.area")}
+                    placeholder={t("products.combobox.notSpecified")}
+                    value={draftArea}
+                    onChange={(v) => setDraftArea(v as Area)}
+                    options={areas}
+                  />
+                </div>
                 <div className="md:col-span-6">
-                  <Label className="mb-1 block text-xs text-muted-foreground">Keywords</Label>
-                  <Input className="h-10" placeholder="Search gift cards…" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                  <Label className="mb-1 block text-xs text-muted-foreground">
+                    {t("products.advanced.keywordsLabel")}
+                  </Label>
+                  <Input
+                    className="h-10"
+                    placeholder={t("products.advanced.keywordsPlaceholder")}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
                 </div>
                 <div className="md:col-span-3 flex gap-2 md:justify-end">
-                  <Button variant="outline" className="h-10 px-4" onClick={resetAdvanced}>Reset</Button>
-                  <Button className="h-10 px-4" onClick={applyAdvanced}>Search</Button>
+                  <Button variant="outline" className="h-10 px-4" onClick={resetAdvanced}>
+                    {t("products.actions.reset")}
+                  </Button>
+                  <Button className="h-10 px-4" onClick={applyAdvanced}>
+                    {t("products.actions.search")}
+                  </Button>
                 </div>
               </div>
             </div>
 
             {/* Info line (desktop only) */}
             <div className="hidden md:block mb-3 text-right text-sm text-muted-foreground">
-              {filteredProducts.length} results
+              {t("products.results", { count: filteredProducts.length })}
             </div>
 
             {/* Product Grid */}
-            <div
-              className="
-    grid gap-6 lg:gap-7
-    grid-cols-1
-    sm:grid-cols-2
-    lg:grid-cols-3
-    xl:grid-cols-3
-    2xl:grid-cols-3
-  "
-            >
+            <div className="grid gap-6 lg:gap-7 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="h-full">
-                  {/* If ProductCard supports className, keep the next line.
-          Otherwise, you can remove className and rely on the wrapper. */}
                   <ProductCard
                     product={product as any}
                     onAddToCart={(id) => {
@@ -379,13 +485,15 @@ export default function ProductsPage() {
             </div>
 
             {filteredProducts.length === 0 && (
-              <div className="mt-8 text-center text-muted-foreground">No gift cards found.</div>
+              <div className="mt-8 text-center text-muted-foreground">
+                {t("products.empty")}
+              </div>
             )}
 
             <nav aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
-              <Button disabled variant="outline">Previous</Button>
+              <Button disabled variant="outline">{t("products.pagination.prev")}</Button>
               <Button aria-current="page" variant="default">1</Button>
-              <Button disabled variant="outline">Next</Button>
+              <Button disabled variant="outline">{t("products.pagination.next")}</Button>
             </nav>
           </section>
         </div>
@@ -395,7 +503,9 @@ export default function ProductsPage() {
       <Sheet open={openFilters} onOpenChange={setOpenFilters}>
         <SheetTrigger asChild><button hidden aria-hidden /></SheetTrigger>
         <SheetContent side="left" className="w-full max-w-md overflow-y-auto p-0">
-          <SheetHeader className="px-4 pt-4"><SheetTitle>Filters</SheetTitle></SheetHeader>
+          <SheetHeader className="px-4 pt-4">
+            <SheetTitle>{t("products.filters.title")}</SheetTitle>
+          </SheetHeader>
           <div className="px-4 pb-24 pt-4">
             <FiltersPanel
               categories={categories} seriesList={seriesList} useCases={useCases}
@@ -411,7 +521,9 @@ export default function ProductsPage() {
             />
           </div>
           <SheetFooter className="sticky bottom-0 left-0 right-0 bg-background/95 backdrop-blur px-4 py-3 border-t shadow-[0_-8px_24px_rgba(0,0,0,0.06)]">
-            <Button className="w-full h-10" onClick={() => setOpenFilters(false)}>Apply & Close</Button>
+            <Button className="w-full h-10" onClick={() => setOpenFilters(false)}>
+              {t("products.mobile.applyClose")}
+            </Button>
           </SheetFooter>
         </SheetContent>
       </Sheet>
@@ -420,21 +532,64 @@ export default function ProductsPage() {
       <Sheet open={openSearch} onOpenChange={setOpenSearch}>
         <SheetTrigger asChild><button hidden aria-hidden /></SheetTrigger>
         <SheetContent side="right" className="w-full max-w-md overflow-y-auto p-0">
-          <SheetHeader className="px-4 pt-4"><SheetTitle>Search</SheetTitle></SheetHeader>
+          <SheetHeader className="px-4 pt-4">
+            <SheetTitle>{t("products.mobile.search")}</SheetTitle>
+          </SheetHeader>
           <div className="px-4 pt-4">
             <div className="rounded-xl border p-4 space-y-4">
-              <Combobox label="Use" value={draftUse} onChange={(v) => setDraftUse(v as UseCase)} options={useCases} />
-              <Combobox label="Who to give it to" value={draftRecipient} onChange={(v) => setDraftRecipient(v as Recipient)} options={recipients} />
-              <Combobox label="Theme" value={draftTheme} onChange={(v) => setDraftTheme(v as Theme)} options={themes} />
-              <Combobox label="Price" value={draftPricePreset} onChange={setDraftPricePreset} options={["0-500", "500-1000", "1000-2000", "2000+"]} />
-              <Combobox label="Area" value={draftArea} onChange={(v) => setDraftArea(v as Area)} options={areas} />
+              <Combobox
+                label={t("products.advanced.use")}
+                placeholder={t("products.combobox.notSpecified")}
+                value={draftUse}
+                onChange={(v) => setDraftUse(v as UseCase)}
+                options={useCases}
+              />
+              <Combobox
+                label={t("products.advanced.recipient")}
+                placeholder={t("products.combobox.notSpecified")}
+                value={draftRecipient}
+                onChange={(v) => setDraftRecipient(v as Recipient)}
+                options={recipients}
+              />
+              <Combobox
+                label={t("products.advanced.theme")}
+                placeholder={t("products.combobox.notSpecified")}
+                value={draftTheme}
+                onChange={(v) => setDraftTheme(v as Theme)}
+                options={themes}
+              />
+              <Combobox
+                label={t("products.advanced.price")}
+                placeholder={t("products.combobox.notSpecified")}
+                value={draftPricePreset}
+                onChange={setDraftPricePreset}
+                options={["0-500", "500-1000", "1000-2000", "2000+"]}
+              />
+              <Combobox
+                label={t("products.advanced.area")}
+                placeholder={t("products.combobox.notSpecified")}
+                value={draftArea}
+                onChange={(v) => setDraftArea(v as Area)}
+                options={areas}
+              />
               <div>
-                <Label className="mb-1 block text-xs text-muted-foreground">Keywords</Label>
-                <Input className="h-10" placeholder="Search gift cards…" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                <Label className="mb-1 block text-xs text-muted-foreground">
+                  {t("products.advanced.keywordsLabel")}
+                </Label>
+                <Input
+                  className="h-10"
+                  placeholder={t("products.advanced.keywordsPlaceholder")}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" className="h-10" onClick={resetAdvanced}>Reset</Button>
-                <Button className="h-10" onClick={() => { applyAdvanced(); setOpenSearch(false); }}>Search</Button>
+                <Button variant="outline" className="h-10" onClick={resetAdvanced}>
+                  {t("products.actions.reset")}
+                </Button>
+                <Button className="h-10" onClick={() => { applyAdvanced(); setOpenSearch(false); }}>
+                  {t("products.actions.search")}
+                </Button>
               </div>
             </div>
           </div>
