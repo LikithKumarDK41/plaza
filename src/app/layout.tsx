@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { SEO_CONFIG } from "~/app";
@@ -33,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <I18nProvider>
           <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange enableSystem>
             <CartProvider>
-              <Header showAuth={true} />
+              <Header />
               <main className="flex flex-col min-h-screen">
                 <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1">
                   {children}
@@ -44,7 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </CartProvider>
           </ThemeProvider>
         </I18nProvider>
-        <SpeedInsights />
       </body>
     </html>
   );
