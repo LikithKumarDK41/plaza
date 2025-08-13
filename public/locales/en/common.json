@@ -28,6 +28,45 @@
         "stats": "Stats",
         "logout": "Log out"
     },
+    "footer": {
+        "tagline": "Discover the perfect gift for any occasion. Send joy with Gift Plaza's digital gift cards.",
+        "social": {
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "instagram": "Instagram",
+            "github": "GitHub",
+            "linkedin": "LinkedIn"
+        },
+        "cols": {
+            "shop": "Shop",
+            "company": "Gift Plaza",
+            "support": "Support"
+        },
+        "links": {
+            "allGiftCards": "All Gift Cards",
+            "birthday": "Birthday",
+            "anniversary": "Anniversary",
+            "festivals": "Festivals",
+            "thankYou": "Thank You",
+            "aboutUs": "About Us",
+            "careers": "Careers",
+            "blog": "Our Blog",
+            "media": "Media",
+            "contact": "Contact",
+            "helpCenter": "Help Center",
+            "deliveryRefund": "Delivery & Refund",
+            "cardCustomization": "Card Customization",
+            "privacyPolicy": "Privacy Policy",
+            "termsOfUse": "Terms of Use"
+        },
+        "bottom": {
+            "privacy": "Privacy",
+            "terms": "Terms",
+            "cookies": "Cookies",
+            "sitemap": "Sitemap"
+        },
+        "copyright": "© {{year}} {{name}}. All rights reserved."
+    },
     "home": {
         "hero": {
             "titleLead": "Celebrate Moments with",

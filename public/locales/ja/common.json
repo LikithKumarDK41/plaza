@@ -28,6 +28,45 @@
         "stats": "統計",
         "logout": "ログアウト"
     },
+    "footer": {
+        "tagline": "どんなシーンにもぴったりの贈り物を。Gift Plaza のデジタルギフトカードで喜びを届けましょう。",
+        "social": {
+            "facebook": "フェイスブック",
+            "twitter": "ツイッター",
+            "instagram": "インスタグラム",
+            "github": "GitHub",
+            "linkedin": "リンクトイン"
+        },
+        "cols": {
+            "shop": "ショップ",
+            "company": "ギフトプラザ",
+            "support": "サポート"
+        },
+        "links": {
+            "allGiftCards": "すべてのギフトカード",
+            "birthday": "バースデー",
+            "anniversary": "アニバーサリー",
+            "festivals": "フェスティバル",
+            "thankYou": "サンキュー",
+            "aboutUs": "私たちについて",
+            "careers": "採用情報",
+            "blog": "ブログ",
+            "media": "メディア",
+            "contact": "お問い合わせ",
+            "helpCenter": "ヘルプセンター",
+            "deliveryRefund": "配送と返金",
+            "cardCustomization": "カードカスタマイズ",
+            "privacyPolicy": "プライバシーポリシー",
+            "termsOfUse": "利用規約"
+        },
+        "bottom": {
+            "privacy": "プライバシー",
+            "terms": "利用規約",
+            "cookies": "クッキー",
+            "sitemap": "サイトマップ"
+        },
+        "copyright": "© {{year}} {{name}}. 無断転載を禁じます。"
+    },
     "home": {
         "hero": {
             "titleLead": "特別な瞬間を祝う",
