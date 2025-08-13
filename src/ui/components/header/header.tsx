@@ -1,112 +1,114 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import { Menu, X, Languages, Globe } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { SEO_CONFIG } from "~/app";
-import { useCurrentUser } from "~/lib/auth-client";
 import { cn } from "~/lib/cn";
-import { Cart } from "~/ui/components/cart";
+import { loadLocale } from "~/lib/i18n.client";
 import { Button } from "~/ui/primitives/button";
 import { Skeleton } from "~/ui/primitives/skeleton";
 
-import { NotificationsWidget } from "../notifications/notifications-widget";
-import { ThemeToggle } from "../theme-toggle";
-import { HeaderUserDropdown } from "./header-user";
+/** Client-only widgets (no SSR; stable placeholders on server) */
+const Cart = dynamic(() => import("~/ui/components/cart").then(m => m.Cart), {
+  ssr: false,
+  loading: () => <Skeleton className="h-9 w-9 rounded-full" />
+});
+const NotificationsWidget = dynamic(
+  () => import("../notifications/notifications-widget").then(m => m.NotificationsWidget),
+  { ssr: false, loading: () => <Skeleton className="h-9 w-9 rounded-full" /> }
+);
+const HeaderUserDropdown = dynamic(
+  () => import("./header-user").then(m => m.HeaderUserDropdown),
+  { ssr: false, loading: () => <Skeleton className="h-10 w-32" /> }
+);
+const ThemeToggle = dynamic(
+  () => import("../theme-toggle").then(m => m.ThemeToggle),
+  { ssr: false, loading: () => <Skeleton className="h-9 w-9 rounded-full" /> }
+);
 
-interface HeaderProps {
-  children?: React.ReactNode;
-  showAuth?: boolean;
-}
-
-export function Header({ showAuth = true }: HeaderProps) {
+export function Header() {
   const pathname = usePathname();
-  const { isPending, user } = useCurrentUser();
+  const { t } = useTranslation("common");
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const mainNavigation = [
-    { href: "/", name: "Home" },
-    { href: "/products", name: "Products" },
-  ];
+  /** Language toggle (no SSR reads) */
+  const [lang, setLang] = useState<"ja" | "en">("ja");
+  useEffect(() => {
+    const saved = (typeof window !== "undefined" && localStorage.getItem("lang")) as
+      | "ja" | "en" | null;
+    if (saved === "ja" || saved === "en") setLang(saved);
+  }, []);
+  const nextLang = lang === "ja" ? "en" : "ja";
+  async function handleToggleLang() {
+    const next = nextLang;
+    setLang(next);
+    if (typeof window !== "undefined") localStorage.setItem("lang", next);
+    await loadLocale(next);
+  }
 
-  const dashboardNavigation = [
-    { href: "/dashboard/stats", name: "Stats" },
-    { href: "/dashboard/profile", name: "Profile" },
-    { href: "/dashboard/settings", name: "Settings" },
-    { href: "/dashboard/uploads", name: "Uploads" },
-    { href: "/admin/summary", name: "Admin" },
-  ];
+  /** Translate nav labels; render skeleton until mounted to avoid SSR drift */
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  const isDashboard =
-    user &&
-    (pathname.startsWith("/dashboard") || pathname.startsWith("/admin")); // todo: remove /admin when admin role is implemented
-  const navigation = isDashboard ? dashboardNavigation : mainNavigation;
+  type NavItem = { href: string; key: string };
+  const navigation: ReadonlyArray<NavItem> = useMemo(
+    () => [
+      { href: "/", key: "nav.home" },
+      { href: "/products", key: "nav.products" },
+      // uncomment if you add dashboard routes later:
+      // { href: "/dashboard/stats", key: "nav.stats" },
+      // { href: "/dashboard/profile", key: "nav.profile" },
+      // { href: "/dashboard/settings", key: "nav.settings" },
+      // { href: "/dashboard/uploads", key: "nav.uploads" },
+      // { href: "/admin/summary", key: "nav.admin" },
+    ],
+    []
+  );
 
-  const renderContent = () => (
-    <header
-      className={`
-        sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur
-        supports-[backdrop-filter]:bg-background/60
-      `}
-    >
-      <div
-        className={`
-          container mx-auto max-w-7xl px-4
-          sm:px-6
-          lg:px-8
-        `}
-      >
+  return (
+    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
+          {/* Brand + Nav */}
           <div className="flex items-center gap-6">
             <Link className="flex items-center gap-2" href="/">
               <span
                 className={cn(
                   "text-xl font-bold",
-                  !isDashboard &&
-                  `
-                      bg-gradient-to-r from-primary to-primary/70 bg-clip-text
-                      tracking-tight text-transparent
-                    `,
+                  "bg-gradient-to-r from-primary to-primary/70 bg-clip-text tracking-tight text-transparent"
                 )}
               >
                 {SEO_CONFIG.name}
               </span>
             </Link>
-            <nav
-              className={`
-                hidden
-                md:flex
-              `}
-            >
+
+            <nav className="hidden md:flex">
               <ul className="flex items-center gap-6">
-                {isPending
-                  ? Array.from({ length: navigation.length }).map((_, i) => (
-                    <li key={i}>
-                      <Skeleton className="h-6 w-20" />
-                    </li>
+                {!mounted
+                  ? // SSR-safe placeholders
+                  navigation.map((_, i) => (
+                    <li key={`s-${i}`}><Skeleton className="h-6 w-20" /></li>
                   ))
                   : navigation.map((item) => {
                     const isActive =
                       pathname === item.href ||
                       (item.href !== "/" && pathname?.startsWith(item.href));
-
                     return (
-                      <li key={item.name}>
+                      <li key={item.key}>
                         <Link
                           className={cn(
-                            `
-                                text-sm font-medium transition-colors
-                                hover:text-primary
-                              `,
-                            isActive
-                              ? "font-semibold text-primary"
-                              : "text-muted-foreground",
+                            "text-sm font-medium transition-colors hover:text-primary",
+                            isActive ? "font-semibold text-primary" : "text-muted-foreground"
                           )}
                           href={item.href}
                         >
-                          {item.name}
+                          {t(item.key)}
                         </Link>
                       </li>
                     );
@@ -115,70 +117,39 @@ export function Header({ showAuth = true }: HeaderProps) {
             </nav>
           </div>
 
+          {/* Actions (always visible) */}
           <div className="flex items-center gap-4">
-            {!isDashboard &&
-              (isPending ? (
-                <Skeleton className={`h-9 w-9 rounded-full`} />
-              ) : (
-                <Cart />
-              ))}
+            <Cart />
+            <NotificationsWidget />
+            <ThemeToggle />
 
-            {isPending ? (
-              <Skeleton className="h-9 w-9 rounded-full" />
-            ) : (
-              <NotificationsWidget />
-            )}
+            {/* Icon-only language toggle */}
+            <Button
+              size="icon"
+              variant="ghost"
+              aria-label="Switch language"
+              title="Switch language"
+              onClick={handleToggleLang}
+            >
+              {lang === "ja" ? <Globe className="h-5 w-5" /> : <Languages className="h-5 w-5" />}
+            </Button>
 
-            {showAuth && (
-              <div
-                className={`
-                  hidden
-                  md:block
-                `}
-              >
-                {user ? (
-                  <HeaderUserDropdown
-                    isDashboard={!!isDashboard}
-                    userEmail={user.email}
-                    userImage={user.image}
-                    userName={user.name}
-                  />
-                ) : isPending ? (
-                  <Skeleton className="h-10 w-32" />
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <Link href="/auth/sign-in">
-                      <Button size="sm" variant="ghost">
-                        Log in
-                      </Button>
-                    </Link>
-                    {/* <Link href="/auth/sign-up">
-                      <Button size="sm">Sign up</Button>
-                    </Link> */}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {!isDashboard &&
-              (isPending ? (
-                <Skeleton className={`h-9 w-9 rounded-full`} />
-              ) : (
-                <ThemeToggle />
-              ))}
+            {/* User dropdown (placeholder data; always visible) */}
+            <HeaderUserDropdown
+              isDashboard={false}
+              userEmail={"guest@example.com"}
+              userImage={undefined}
+              userName={"Guest"}
+            />
 
             {/* Mobile menu button */}
             <Button
               className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen((v) => !v)}
               size="icon"
               variant="ghost"
             >
-              {mobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
+              {mobileMenuOpen ? <X className="h-5 w-5 rotate-90 transition-transform" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
@@ -188,9 +159,9 @@ export function Header({ showAuth = true }: HeaderProps) {
       {mobileMenuOpen && (
         <div className="md:hidden">
           <div className="space-y-1 border-b px-4 py-3">
-            {isPending
-              ? Array.from({ length: navigation.length }).map((_, i) => (
-                <div className="py-2" key={i}>
+            {!mounted
+              ? navigation.map((_, i) => (
+                <div className="py-2" key={`ms-${i}`}>
                   <Skeleton className="h-6 w-32" />
                 </div>
               ))
@@ -198,57 +169,31 @@ export function Header({ showAuth = true }: HeaderProps) {
                 const isActive =
                   pathname === item.href ||
                   (item.href !== "/" && pathname?.startsWith(item.href));
-
                 return (
                   <Link
                     className={cn(
                       "block rounded-md px-3 py-2 text-base font-medium",
                       isActive
                         ? "bg-primary/10 text-primary"
-                        : `
-                            text-foreground
-                            hover:bg-muted/50 hover:text-primary
-                          `,
+                        : "text-foreground hover:bg-muted/50 hover:text-primary"
                     )}
                     href={item.href}
-                    key={item.name}
+                    key={item.key}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {item.name}
+                    {t(item.key)}
                   </Link>
                 );
               })}
           </div>
 
-          {showAuth && !user && (
-            <div className="space-y-1 border-b px-4 py-3">
-              <Link
-                className={`
-                  block rounded-md px-3 py-2 text-base font-medium
-                  hover:bg-muted/50
-                `}
-                href="/auth/sign-in"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Log in
-              </Link>
-              <Link
-                className={`
-                  block rounded-md bg-primary px-3 py-2 text-base font-medium
-                  text-primary-foreground
-                  hover:bg-primary/90
-                `}
-                href="/auth/sign-up"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Sign up
-              </Link>
-            </div>
-          )}
+          <div className="flex items-center justify-end px-4 py-3 border-b">
+            <Button size="icon" variant="ghost" onClick={handleToggleLang}>
+              {lang === "ja" ? <Globe className="h-5 w-5" /> : <Languages className="h-5 w-5" />}
+            </Button>
+          </div>
         </div>
       )}
     </header>
   );
-
-  return renderContent();
 }

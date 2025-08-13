@@ -1,0 +1,54 @@
+{
+    "seo": {
+        "name": "GIFT PLAZA",
+        "fullName": "GIFT PLAZA – Digital Gift Card Store",
+        "slogan": "A store that brings joy to every celebration.",
+        "description": "Gift Plaza is a modern digital gift card platform built with Next.js and powerful web technologies. It offers a seamless gifting experience with beautifully designed categories for every occasion."
+    },
+    "system": {
+        "repoName": "Gift Plaza",
+        "repoOwner": "Likith Kumar D K"
+    },
+    "nav": {
+        "home": "Home",
+        "products": "Products",
+        "stats": "Stats",
+        "profile": "Profile",
+        "settings": "Settings",
+        "uploads": "Uploads",
+        "admin": "Admin"
+    },
+    "userMenu": {
+        "openMenu": "Open user menu",
+        "user": "User",
+        "profile": "Profile",
+        "settings": "Settings",
+        "uploads": "Uploads",
+        "admin": "Admin",
+        "stats": "Stats",
+        "logout": "Log out"
+    },
+    "home": {
+        "hero": {
+            "titleLead": "Celebrate Moments with",
+            "titleEmphasis": "Digital Gift Cards",
+            "subtitle": "Send instant joy with personalized gift cards for birthdays, anniversaries, festivals, and more – all in one place at GiftPlaza.",
+            "ctaBrowse": "Browse Gift Cards",
+            "ctaHow": "How It Works",
+            "badgeInstant": "Instant digital delivery",
+            "badgeCustom": "Custom designs for every occasion",
+            "imageAlt": "GiftPlaza Hero"
+        },
+        "categories": {
+            "title": "Shop by Category",
+            "subtitle": "Explore gift cards for every occasion",
+            "browseAria": "Browse {{category}} gift cards",
+            "count": "{{count}} gift cards"
+        },
+        "featured": {
+            "title": "Featured Gift Cards",
+            "subtitle": "Discover our top-rated and trending gift cards",
+            "viewAll": "View All Gift Cards"
+        }
+    }
+}

@@ -125,48 +125,24 @@ export const testimonials = [
 export const featuredGiftCardsHomepage = [
   {
     id: "1",
-    name: "Digital Gift Card",
+    name: "Custom Photo Mug Gift Card",
     category: "Birthday",
-    image:
-      "/plaza/home/giftcards/gift-card1.png",
-    inStock: true,
-    originalPrice: 500,
-    price: 500,
-    rating: 5.0,
-  },
-  {
-    id: "2",
-    name: "Anniversary Gift Card",
-    category: "Anniversary",
-    image:
-      "/plaza/home/giftcards/gift-card2.png",
-    inStock: true,
-    originalPrice: 1000,
-    price: 1000,
-    rating: 4.8,
-  },
-  {
-    id: "3",
-    name: "Festival Gift Card",
-    category: "Festivals",
-    image:
-      "/plaza/home/giftcards/gift-card3.png",
+    image: "/plaza/home/giftcards/gift-card6.png", // save the generated image here
     inStock: true,
     originalPrice: 2000,
     price: 2000,
-    rating: 4.9,
+    rating: 4.9
   },
   {
-    id: "4",
-    name: "Thank You Gift Card",
-    category: "Thank You",
-    image:
-      "/plaza/home/giftcards/gift-card4.png",
+    id: "2",
+    name: "Custom Artwork T-Shirt Gift Card",
+    category: "Festivals",
+    image: "/plaza/home/giftcards/gift-card7.png", // save the generated T-shirt-in-box image here
     inStock: true,
-    originalPrice: 300,
-    price: 300,
-    rating: 4.7,
-  },
+    originalPrice: 3500,
+    price: 3500,
+    rating: 4.8
+  }
 ];
 
 export const giftCardCategories = [

@@ -1,0 +1,54 @@
+{
+    "seo": {
+        "name": "ギフトプラザ",
+        "fullName": "ギフトプラザ – デジタルギフトカードストア",
+        "slogan": "あらゆるお祝いに喜びを届けます。",
+        "description": "Gift Plaza は Next.js で構築された最新のデジタルギフトカードプラットフォームです。あらゆるシーンに合う美しいカテゴリで、シームレスな贈り物体験を提供します。"
+    },
+    "system": {
+        "repoName": "ギフトプラザ",
+        "repoOwner": "Likith Kumar D K"
+    },
+    "nav": {
+        "home": "ホーム",
+        "products": "商品",
+        "stats": "統計",
+        "profile": "プロフィール",
+        "settings": "設定",
+        "uploads": "アップロード",
+        "admin": "管理"
+    },
+    "userMenu": {
+        "openMenu": "ユーザーメニューを開く",
+        "user": "ユーザー",
+        "profile": "プロフィール",
+        "settings": "設定",
+        "uploads": "アップロード",
+        "admin": "管理",
+        "stats": "統計",
+        "logout": "ログアウト"
+    },
+    "home": {
+        "hero": {
+            "titleLead": "特別な瞬間を祝う",
+            "titleEmphasis": "デジタルギフトカード",
+            "subtitle": "誕生日・記念日・季節のイベントに。パーソナライズしたギフトカードをその場でお届け。",
+            "ctaBrowse": "ギフトカードを見る",
+            "ctaHow": "ご利用方法",
+            "badgeInstant": "即時デジタル配信",
+            "badgeCustom": "シーンに合わせたデザイン",
+            "imageAlt": "GiftPlaza ヒーロー画像"
+        },
+        "categories": {
+            "title": "カテゴリーから選ぶ",
+            "subtitle": "あらゆるシーンのギフトカードをご用意",
+            "browseAria": "{{category}} のギフトカードを見る",
+            "count": "全{{count}}件"
+        },
+        "featured": {
+            "title": "おすすめギフトカード",
+            "subtitle": "人気＆注目のギフトカードをチェック",
+            "viewAll": "すべてのギフトカードを見る"
+        }
+    }
+}
