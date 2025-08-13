@@ -23,14 +23,14 @@ import {
 /*                              Sample product data                            */
 /* -------------------------------------------------------------------------- */
 const featuredGiftCardsHomepage = [
-  { id: "1", name: "Digital Gift Card - ₹500", category: "Birthday", useCase: "Gifting", series: "Classic", recipient: "Anyone", theme: "Minimal", area: "Pan-India", image: "/plaza/home/giftcards/gift-card1.png", inStock: true, originalPrice: 500, price: 500, rating: 5.0 },
-  { id: "2", name: "Anniversary Gift Card - ₹1000", category: "Anniversary", useCase: "Couples", series: "Premium", recipient: "Couple", theme: "Romantic", area: "Metro", image: "/plaza/home/giftcards/gift-card2.png", inStock: true, originalPrice: 1000, price: 1000, rating: 4.8 },
-  { id: "3", name: "Festival Gift Card - ₹2000", category: "Festivals", useCase: "Seasonal", series: "Premium", recipient: "Family", theme: "Festive", area: "Pan-India", image: "/plaza/home/giftcards/gift-card3.png", inStock: true, originalPrice: 2000, price: 2000, rating: 4.9 },
-  { id: "4", name: "Thank You Gift Card - ₹300", category: "Thank You", useCase: "Appreciation", series: "Classic", recipient: "Colleague", theme: "Thank You", area: "Online", image: "/plaza/home/giftcards/gift-card4.png", inStock: true, originalPrice: 300, price: 300, rating: 4.7 },
-  { id: "5", name: "Digital Gift Card - ₹500", category: "Birthday", useCase: "Gifting", series: "Classic", recipient: "Anyone", theme: "Minimal", area: "Pan-India", image: "/plaza/home/giftcards/gift-card1.png", inStock: true, originalPrice: 500, price: 500, rating: 5.0 },
-  { id: "6", name: "Anniversary Gift Card - ₹1000", category: "Anniversary", useCase: "Couples", series: "Premium", recipient: "Couple", theme: "Romantic", area: "Metro", image: "/plaza/home/giftcards/gift-card2.png", inStock: true, originalPrice: 1000, price: 1000, rating: 4.8 },
-  { id: "7", name: "Festival Gift Card - ₹2000", category: "Festivals", useCase: "Seasonal", series: "Premium", recipient: "Family", theme: "Festive", area: "Pan-India", image: "/plaza/home/giftcards/gift-card3.png", inStock: true, originalPrice: 2000, price: 2000, rating: 4.9 },
-  { id: "8", name: "Thank You Gift Card - ₹300", category: "Thank You", useCase: "Appreciation", series: "Classic", recipient: "Colleague", theme: "Thank You", area: "Online", image: "/plaza/home/giftcards/gift-card4.png", inStock: true, originalPrice: 300, price: 300, rating: 4.7 },
+  { id: "1", name: "Digital Gift Card", category: "Birthday", useCase: "Gifting", series: "Classic", recipient: "Anyone", theme: "Minimal", area: "Pan-India", image: "/plaza/home/giftcards/gift-card1.png", inStock: true, originalPrice: 500, price: 500, rating: 5.0 },
+  { id: "2", name: "Anniversary Gift Card", category: "Anniversary", useCase: "Couples", series: "Premium", recipient: "Couple", theme: "Romantic", area: "Metro", image: "/plaza/home/giftcards/gift-card2.png", inStock: true, originalPrice: 1000, price: 1000, rating: 4.8 },
+  { id: "3", name: "Festival Gift Card", category: "Festivals", useCase: "Seasonal", series: "Premium", recipient: "Family", theme: "Festive", area: "Pan-India", image: "/plaza/home/giftcards/gift-card3.png", inStock: true, originalPrice: 2000, price: 2000, rating: 4.9 },
+  { id: "4", name: "Thank You Gift Card", category: "Thank You", useCase: "Appreciation", series: "Classic", recipient: "Colleague", theme: "Thank You", area: "Online", image: "/plaza/home/giftcards/gift-card4.png", inStock: true, originalPrice: 300, price: 300, rating: 4.7 },
+  { id: "5", name: "Digital Gift Card", category: "Birthday", useCase: "Gifting", series: "Classic", recipient: "Anyone", theme: "Minimal", area: "Pan-India", image: "/plaza/home/giftcards/gift-card1.png", inStock: true, originalPrice: 500, price: 500, rating: 5.0 },
+  { id: "6", name: "Anniversary Gift Card", category: "Anniversary", useCase: "Couples", series: "Premium", recipient: "Couple", theme: "Romantic", area: "Metro", image: "/plaza/home/giftcards/gift-card2.png", inStock: true, originalPrice: 1000, price: 1000, rating: 4.8 },
+  { id: "7", name: "Festival Gift Card", category: "Festivals", useCase: "Seasonal", series: "Premium", recipient: "Family", theme: "Festive", area: "Pan-India", image: "/plaza/home/giftcards/gift-card3.png", inStock: true, originalPrice: 2000, price: 2000, rating: 4.9 },
+  { id: "8", name: "Thank You Gift Card", category: "Thank You", useCase: "Appreciation", series: "Classic", recipient: "Colleague", theme: "Thank You", area: "Online", image: "/plaza/home/giftcards/gift-card4.png", inStock: true, originalPrice: 300, price: 300, rating: 4.7 },
 ] as const;
 
 type Category = string;
@@ -148,15 +148,15 @@ function FiltersPanel({
       </section>
 
       <section>
-        <Label className="mb-2 block text-sm">Price (₹)</Label>
+        <Label className="mb-2 block text-sm">Price (¥)</Label>
         <div className="px-2">
           <Slider value={range} min={minPrice} max={maxPrice} step={50} onValueChange={(v) => setRange(v as number[])} />
         </div>
         <div className="mt-2 px-1 flex items-center justify-between text-xs font-medium text-muted-foreground">
-          <span>₹{priceMin}</span><span>₹{priceMax}</span>
+          <span>¥{priceMin}</span><span>¥{priceMax}</span>
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
-          {[{ l: "≤ ₹500", v: "0-500" }, { l: "₹500–₹1000", v: "500-1000" }, { l: "₹1000–₹2000", v: "1000-2000" }, { l: "≥ ₹2000", v: "2000+" }].map(r => (
+          {[{ l: "≤ ¥500", v: "0-500" }, { l: "¥500–¥1000", v: "500-1000" }, { l: "¥1000–¥2000", v: "1000-2000" }, { l: "≥ ¥2000", v: "2000+" }].map(r => (
             <Button key={r.v} size="sm" className="h-9 px-3" variant="outline" onClick={() => quickPreset(r.v)}>{r.l}</Button>
           ))}
         </div>

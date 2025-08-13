@@ -29,6 +29,20 @@ type ProductCardProps = Omit<
   variant?: "compact" | "default";
 };
 
+/* -------------------------------------------------------------------------- */
+/*                         Helpers (shared, memo-safe)                        */
+/* -------------------------------------------------------------------------- */
+
+// const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
+//   currency: "USD",
+//   style: "currency",
+// });
+
+const CURRENCY_FORMATTER = new Intl.NumberFormat("ja-JP", {
+  currency: "JPY",
+  style: "currency",
+});
+
 export function ProductCard({
   className,
   onAddToCart,
@@ -63,8 +77,8 @@ export function ProductCard({
 
   const discount = product.originalPrice
     ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100
-      )
+      ((product.originalPrice - product.price) / product.originalPrice) * 100
+    )
     : 0;
 
   const renderStars = () => {
@@ -81,8 +95,8 @@ export function ProductCard({
               i < fullStars
                 ? "fill-yellow-400 text-yellow-400"
                 : i === fullStars && hasHalfStar
-                ? "fill-yellow-400/50 text-yellow-400"
-                : "stroke-muted/40 text-muted"
+                  ? "fill-yellow-400/50 text-yellow-400"
+                  : "stroke-muted/40 text-muted"
             )}
             key={`star-${product.id}-position-${i + 1}`}
           />
@@ -189,11 +203,11 @@ export function ProductCard({
                 <div className="mt-1.5">{renderStars()}</div>
                 <div className="mt-2 flex items-center gap-1.5">
                   <span className="font-medium text-foreground">
-                    ${product.price.toFixed(2)}
+                    {CURRENCY_FORMATTER.format(product.price)}
                   </span>
                   {product.originalPrice ? (
                     <span className="text-sm text-muted-foreground line-through">
-                      ${product.originalPrice.toFixed(2)}
+                      {CURRENCY_FORMATTER.format(product.originalPrice)}
                     </span>
                   ) : null}
                 </div>
@@ -231,11 +245,11 @@ export function ProductCard({
               <div className="flex w-full items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <span className="font-medium text-foreground">
-                    ${product.price.toFixed(2)}
+                    {CURRENCY_FORMATTER.format(product.price)}
                   </span>
                   {product.originalPrice ? (
                     <span className="text-sm text-muted-foreground line-through">
-                      ${product.originalPrice.toFixed(2)}
+                      {CURRENCY_FORMATTER.format(product.originalPrice)}
                     </span>
                   ) : null}
                 </div>

@@ -114,7 +114,7 @@ export default function HomePage() {
                       Browse Gift Cards <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <Link href="/how-it-works">
+                  <Link href="#">
                     <Button className="h-12 px-8 transition-colors duration-200" size="lg" variant="outline">
                       How It Works
                     </Button>

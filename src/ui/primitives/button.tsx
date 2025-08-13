@@ -42,39 +42,43 @@ const buttonVariants = cva(
         `,
       },
       variant: {
+        /* Light: teal; Dark: primary. Force hover with ! */
         default: `
-          bg-primary text-primary-foreground shadow-xs
-          hover:bg-primary/90 hover:shadow-md
-          focus-visible:ring-2 focus-visible:ring-primary/60
-        `,
+    bg-[#5cd0e0] text-primary-foreground shadow-xs
+    transition-colors
+    hover:!bg-[#90b3e4] hover:shadow-md
+    focus-visible:ring-2 focus-visible:ring-primary/60
+    dark:bg-primary dark:text-primary-foreground
+    dark:hover:!bg-primary/90
+  `,
         destructive: `
-          bg-destructive text-white shadow-xs
-          hover:bg-destructive/90 hover:shadow-md
-          focus-visible:ring-2 focus-visible:ring-destructive/40
-          dark:bg-destructive/60 dark:focus-visible:ring-destructive/40
-        `,
+    bg-destructive text-white shadow-xs
+    hover:bg-destructive/90 hover:shadow-md
+    focus-visible:ring-2 focus-visible:ring-destructive/40
+    dark:bg-destructive/60 dark:focus-visible:ring-destructive/40
+  `,
         ghost: `
-          hover:bg-accent hover:text-accent-foreground
-          focus-visible:ring-2 focus-visible:ring-accent/40
-          dark:hover:bg-accent/50
-        `,
+    hover:bg-accent hover:text-accent-foreground
+    focus-visible:ring-2 focus-visible:ring-accent/40
+    dark:hover:bg-accent/50
+  `,
         link: `
-          text-primary underline-offset-4
-          hover:underline
-          focus-visible:ring-2 focus-visible:ring-primary/40
-        `,
+    text-primary underline-offset-4
+    hover:underline
+    focus-visible:ring-2 focus-visible:ring-primary/40
+  `,
         outline: `
-          border bg-background shadow-xs
-          hover:bg-accent hover:text-accent-foreground hover:shadow-md
-          focus-visible:ring-2 focus-visible:ring-accent/40
-          dark:border-input dark:bg-input/30 dark:hover:bg-input/50
-        `,
+    border bg-background shadow-xs
+    hover:bg-accent hover:text-accent-foreground hover:shadow-md
+    focus-visible:ring-2 focus-visible:ring-accent/40
+    dark:border-input dark:bg-input/30 dark:hover:bg-input/50
+  `,
         secondary: `
-          bg-secondary text-secondary-foreground shadow-xs
-          hover:bg-secondary/80 hover:shadow-md
-          focus-visible:ring-2 focus-visible:ring-secondary/40
-        `,
-      },
+    bg-secondary text-secondary-foreground shadow-xs
+    hover:bg-secondary/80 hover:shadow-md
+    focus-visible:ring-2 focus-visible:ring-secondary/40
+  `,
+      }
     },
   },
 );

@@ -1,15 +1,15 @@
 export const SEO_CONFIG = {
-  name: "GiftPlaza",
-  fullName: "GiftPlaza – Digital Gift Card Store",
+  name: "GIFT PLAZA",
+  fullName: "GIFT PLAZA – Digital Gift Card Store",
   slogan: "A store that brings joy to every celebration.",
   description:
-    "GiftPlaza is a modern digital gift card platform built with Next.js and powerful web technologies. It offers a seamless gifting experience with beautifully designed categories for every occasion.",
+    "Gift Plaza is a modern digital gift card platform built with Next.js and powerful web technologies. It offers a seamless gifting experience with beautifully designed categories for every occasion.",
 };
 
 export const SYSTEM_CONFIG = {
   redirectAfterSignIn: "/dashboard/uploads",
   redirectAfterSignUp: "/dashboard/uploads",
-  repoName: "GiftPlaza",
+  repoName: "Gift Plaza",
   repoOwner: "Likith Kumar D K",
   repoStars: true, // optional toggle for GitHub stars display
 };

@@ -125,7 +125,7 @@ export const testimonials = [
 export const featuredGiftCardsHomepage = [
   {
     id: "1",
-    name: "Digital Gift Card - ₹500",
+    name: "Digital Gift Card",
     category: "Birthday",
     image:
       "/plaza/home/giftcards/gift-card1.png",
@@ -136,7 +136,7 @@ export const featuredGiftCardsHomepage = [
   },
   {
     id: "2",
-    name: "Anniversary Gift Card - ₹1000",
+    name: "Anniversary Gift Card",
     category: "Anniversary",
     image:
       "/plaza/home/giftcards/gift-card2.png",
@@ -147,7 +147,7 @@ export const featuredGiftCardsHomepage = [
   },
   {
     id: "3",
-    name: "Festival Gift Card - ₹2000",
+    name: "Festival Gift Card",
     category: "Festivals",
     image:
       "/plaza/home/giftcards/gift-card3.png",
@@ -158,7 +158,7 @@ export const featuredGiftCardsHomepage = [
   },
   {
     id: "4",
-    name: "Thank You Gift Card - ₹300",
+    name: "Thank You Gift Card",
     category: "Thank You",
     image:
       "/plaza/home/giftcards/gift-card4.png",

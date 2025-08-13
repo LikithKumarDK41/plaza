@@ -56,6 +56,11 @@ export function CartClient({ className, mockCart }: CartProps) {
     0,
   );
 
+  const subtotalFormatted = new Intl.NumberFormat("ja-JP", {
+    style: "currency",
+    currency: "JPY"
+  }).format(subtotal);
+
   const handleUpdateQuantity = (id: string, newQuantity: number) => {
     if (newQuantity < 1) return;
     setCartItems((prev) =>
@@ -247,7 +252,7 @@ export function CartClient({ className, mockCart }: CartProps) {
                           </button>
                         </div>
                         <div className="text-sm font-medium">
-                          ${(item.price * item.quantity).toFixed(2)}
+                          ¥{(item.price * item.quantity).toFixed(2)}
                         </div>
                       </div>
                     </div>
@@ -263,7 +268,7 @@ export function CartClient({ className, mockCart }: CartProps) {
             <div className="space-y-3">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span className="font-medium">${subtotal.toFixed(2)}</span>
+                <span className="font-medium">¥{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Shipping</span>
@@ -273,7 +278,7 @@ export function CartClient({ className, mockCart }: CartProps) {
               <div className="flex items-center justify-between">
                 <span className="text-base font-semibold">Total</span>
                 <span className="text-base font-semibold">
-                  ${subtotal.toFixed(2)}
+                  ¥{subtotal.toFixed(2)}
                 </span>
               </div>
               <Button className="w-full" size="lg">

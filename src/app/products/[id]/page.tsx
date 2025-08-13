@@ -32,10 +32,16 @@ interface Product {
 /*                         Helpers (shared, memo-safe)                        */
 /* -------------------------------------------------------------------------- */
 
-const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
-  currency: "USD",
+// const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
+//   currency: "USD",
+//   style: "currency",
+// });
+
+const CURRENCY_FORMATTER = new Intl.NumberFormat("ja-JP", {
+  currency: "JPY",
   style: "currency",
 });
+
 
 /** `feature -> feature` ➜ `feature-feature` (for React keys) */
 const slugify = (str: string) =>
@@ -53,190 +59,175 @@ const range = (length: number) => Array.from({ length }, (_, i) => i);
 
 const products: Product[] = [
   {
-    category: "Audio",
+    category: "Birthday",
     description:
-      "Experience crystal-clear sound with our premium wireless headphones. Featuring active noise cancellation, 30-hour battery life, and comfortable over-ear design for all-day listening comfort.",
+      "Celebrate any birthday with a flexible digital gift card. Delivered instantly via email and redeemable on all items across the store.",
     features: [
-      "Active noise cancellation",
-      "30-hour battery life",
-      "Bluetooth 5.2 connectivity",
-      "Comfortable memory foam ear cushions",
-      "Quick charge - 5 minutes for 4 hours of playback",
-      "Built-in microphone for calls",
+      "Instant email delivery",
+      "Personalized message",
+      "Usable on all products",
+      "No activation fees",
+      "Balance tracking in account",
+      "Multiple partial redemptions allowed",
     ],
     id: "1",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    image: "/plaza/home/giftcards/gift-card1.png",
     inStock: true,
-    name: "Premium Wireless Headphones",
-    originalPrice: 249.99,
-    price: 199.99,
-    rating: 4.5,
+    name: "Digital Gift Card",
+    originalPrice: 500,
+    price: 500,
+    rating: 5.0,
     specs: {
-      batteryLife: "30 hours",
-      brand: "AudioMax",
-      connectivity: "Bluetooth 5.2, 3.5mm jack",
-      model: "WH-1000XM5",
-      warranty: "2 years",
-      weight: "250g",
+      brand: "Plaza",
+      model: "Birthday-500",
+      warranty: "N/A",
+      validity: "12 months",
+      delivery: "Email",
+      redeemAt: "Online checkout",
     },
   },
   {
-    category: "Wearables",
+    category: "Anniversary",
     description:
-      "Stay connected and track your fitness goals with our advanced smartwatch. Features health monitoring, GPS tracking, and a beautiful always-on display.",
+      "A thoughtful anniversary gift that lets couples choose what they really want. Send a heartfelt message along with the card.",
     features: [
-      "Health monitoring (heart rate, ECG, sleep)",
-      "Water resistant up to 50m",
-      "GPS tracking",
-      "7-day battery life",
-      "Always-on retina display",
-      "Customizable watch faces",
+      "Custom greeting card design",
+      "Instant or scheduled delivery",
+      "Works with discounted items",
+      "Secure balance protection",
+      "Supports partial payments",
+      "No additional fees",
     ],
     id: "2",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    image: "/plaza/home/giftcards/gift-card2.png",
     inStock: true,
-    name: "Smart Watch Series 5",
-    originalPrice: 349.99,
-    price: 299.99,
-    rating: 4.2,
-    specs: {
-      batteryLife: "7 days",
-      brand: "TechFit",
-      compatibility: "iOS, Android",
-      display: '1.5" AMOLED',
-      model: "Watch Pro 5",
-      warranty: "1 year",
-      waterResistance: "5 ATM",
-    },
-  },
-  {
-    category: "Photography",
-    description:
-      "Capture stunning photos and videos with our professional camera kit. Includes a high-resolution sensor, 4K video recording, and a versatile lens kit for any shooting situation.",
-    features: [
-      "24.2MP full-frame sensor",
-      "4K video recording at 60fps",
-      "5-axis image stabilization",
-      "Weather-sealed body",
-      "Dual SD card slots",
-      "Includes 24-70mm f/2.8 lens",
-    ],
-    id: "3",
-    image:
-      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    inStock: false,
-    name: "Professional Camera Kit",
-    originalPrice: 1499.99,
-    price: 1299.99,
+    name: "Anniversary Gift Card",
+    originalPrice: 1000,
+    price: 1000,
     rating: 4.8,
     specs: {
-      brand: "OptiPro",
-      iso: "100-51,200 (expandable to 204,800)",
-      model: "X-1000",
-      resolution: "24.2MP",
-      sensorType: "Full-frame CMOS",
-      shutter: "1/8000 to 30 sec",
-      warranty: "2 years",
+      brand: "Plaza",
+      model: "Anniv-1000",
+      warranty: "N/A",
+      validity: "18 months",
+      delivery: "Email",
+      redeemAt: "Online checkout",
     },
   },
   {
-    category: "Furniture",
+    category: "Festivals",
     description:
-      "Work in comfort with our ergonomic office chair designed for all-day support. Features adjustable height, lumbar support, and breathable mesh back.",
+      "Share festive cheer with a generous digital gift card. Perfect for holidays and seasonal celebrations.",
     features: [
-      "Adjustable height and armrests",
-      "Breathable mesh back",
-      "Lumbar support",
-      "360° swivel",
-      "Heavy-duty base with smooth-rolling casters",
-      "Weight capacity: 300 lbs",
+      "Festive e‑card themes",
+      "Delivery within 1 hour",
+      "Schedule for a future date",
+      "Redeemable on most promo items",
+      "Multiple currency checkout supported",
+      "Balance remains until ¥0",
     ],
-    id: "4",
-    image:
-      "https://images.unsplash.com/photo-1506377295352-e3154d43ea9e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    id: "3",
+    image: "/plaza/home/giftcards/gift-card3.png",
     inStock: true,
-    name: "Ergonomic Office Chair",
-    originalPrice: 299.99,
-    price: 249.99,
-    rating: 4.6,
-    specs: {
-      adjustableHeight: "16-20 inches",
-      brand: "ErgoComfort",
-      dimensions: '26"W x 26"D x 38-42"H',
-      material: "Mesh back, fabric seat",
-      maxWeight: "300 lbs",
-      model: "Executive Pro",
-      warranty: "5 years",
-    },
-  },
-  {
-    category: "Electronics",
-    description:
-      "The ultimate smartphone experience with a stunning display, powerful camera system, and all-day battery life.",
-    features: [
-      '6.7" Super Retina XDR display',
-      "Triple camera system (12MP wide, ultra-wide, telephoto)",
-      "Face ID for secure authentication",
-      "A16 Bionic chip",
-      "Up to 1TB storage",
-      "All-day battery life",
-    ],
-    id: "5",
-    image:
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-    inStock: true,
-    name: "Smartphone Pro Max",
-    originalPrice: 1099.99,
-    price: 999.99,
+    name: "Festival Gift Card",
+    originalPrice: 2000,
+    price: 2000,
     rating: 4.9,
     specs: {
-      battery: "4,352mAh",
-      brand: "TechPro",
-      camera: "12MP triple camera system",
-      display: '6.7" Super Retina XDR',
-      model: "Galaxy Pro Max",
-      os: "iOS 16",
-      processor: "A16 Bionic chip",
-      storage: "128GB/256GB/512GB/1TB",
-      warranty: "1 year",
+      brand: "Plaza",
+      model: "Festival-2000",
+      warranty: "N/A",
+      validity: "12 months",
+      delivery: "Email",
+      redeemAt: "Online checkout",
     },
   },
   {
-    category: "Electronics",
+    category: "Thank You",
     description:
-      "Transform your home entertainment with our Ultra HD Smart TV featuring vibrant colors, immersive sound, and smart connectivity.",
+      "Send a quick note of appreciation that makes a real difference. Great for teachers, colleagues, and everyday heroes.",
     features: [
-      '55" 4K Ultra HD display',
-      "Dolby Vision HDR",
-      "Dolby Atmos sound",
-      "Built-in voice assistant",
-      "Smart home integration",
-      "Multiple HDMI and USB ports",
+      "Simple, fast checkout",
+      "Short thank‑you templates",
+      "Emoji support in messages",
+      "Guest checkout compatible",
+      "No hidden fees",
+      "Track usage in account",
     ],
-    id: "6",
-    image:
-      "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    id: "4",
+    image: "/plaza/home/giftcards/gift-card4.png",
     inStock: true,
-    name: 'Ultra HD Smart TV 55"',
-    originalPrice: 899.99,
-    price: 799.99,
+    name: "Thank You Gift Card",
+    originalPrice: 300,
+    price: 300,
     rating: 4.7,
     specs: {
-      audio: "40W Dolby Atmos",
-      brand: "VisionPro",
-      connectivity: "HDMI x4, USB x3, Wi-Fi, Bluetooth",
-      display: '55" 4K Ultra HD LED',
-      hdr: "Dolby Vision, HDR10+",
-      model: "X55-4K",
-      refreshRate: "120Hz",
-      resolution: "3840 x 2160",
-      smartFeatures: "Voice control, App store",
-      warranty: "2 years",
+      brand: "Plaza",
+      model: "Thanks-300",
+      warranty: "N/A",
+      validity: "6 months",
+      delivery: "Email",
+      redeemAt: "Online checkout",
+    },
+  },
+  {
+    category: "Wedding",
+    description:
+      "A perfect wedding gift for newlyweds—flexibility to choose home essentials, electronics, decor, and more.",
+    features: [
+      "Elegant wedding designs",
+      "Personalized sender name & note",
+      "Instant delivery",
+      "Supports partial redemption",
+      "No expiry fees",
+      "Usable across categories",
+    ],
+    id: "5",
+    image: "/plaza/home/giftcards/gift-card5.png",
+    inStock: true,
+    name: "Wedding Gift Card",
+    originalPrice: 5000,
+    price: 5000,
+    rating: 4.9,
+    specs: {
+      brand: "Plaza",
+      model: "Wedding-5000",
+      warranty: "N/A",
+      validity: "24 months",
+      delivery: "Email",
+      redeemAt: "Online checkout",
+    },
+  },
+  {
+    category: "Congratulations",
+    description:
+      "Perfect for graduations, promotions, or any big win. Say congrats with a flexible card they’ll actually use.",
+    features: [
+      "Congrats e‑card templates",
+      "Schedule or instant send",
+      "Redeemable store‑wide",
+      "Balance remains for future use",
+      "Works with most promos",
+      "No activation or maintenance fees",
+    ],
+    id: "6",
+    image: "/plaza/home/giftcards/gift-card6.png",
+    inStock: true,
+    name: "Congratulations Gift Card",
+    originalPrice: 10000,
+    price: 10000,
+    rating: 4.8,
+    specs: {
+      brand: "Plaza",
+      model: "Congrats-10000",
+      warranty: "N/A",
+      validity: "24 months",
+      delivery: "Email",
+      redeemAt: "Online checkout",
     },
   },
 ];
+
 
 /* -------------------------------------------------------------------------- */
 /*                                 Component                                  */
@@ -382,12 +373,11 @@ export default function ProductDetailPage() {
                       <Star
                         className={`
                           h-5 w-5
-                          ${
-                            i < Math.floor(product.rating)
-                              ? "fill-primary text-primary"
-                              : i < product.rating
-                                ? "fill-primary/50 text-primary"
-                                : "text-muted-foreground"
+                          ${i < Math.floor(product.rating)
+                            ? "fill-primary text-primary"
+                            : i < product.rating
+                              ? "fill-primary/50 text-primary"
+                              : "text-muted-foreground"
                           }
                         `}
                         key={`star-${i}`}
